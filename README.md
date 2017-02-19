@@ -59,7 +59,7 @@ The `attributes` object in the example above would look something like this:
 	"screen_width": 1280,
 	"utm_medium": "google_search_ads",
 	"utm_source": "google",
-	"sign_up_button": "green-button",
+	"signup_button": "red-signup-button",
 	"converted_at": "2017-02-19T17:52:41.981Z",
 	"conversion_page": "http://localhost:5000/signup"
 }
