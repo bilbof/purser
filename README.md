@@ -57,8 +57,8 @@ The `attributes` object in the example above would look something like this:
 	"landing_page": "http://localhost:5000/product",
 	"screen_height": 800,
 	"screen_width": 1280,
-  "utm_medium": "google_search_ads",
-  "utm_source": "google",
+	"utm_medium": "google_search_ads",
+	"utm_source": "google",
 	"sign_up_button": "green-button",
 	"converted_at": "2017-02-19T17:52:41.981Z",
 	"conversion_page": "http://localhost:5000/signup"
