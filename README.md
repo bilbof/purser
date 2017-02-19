@@ -22,10 +22,10 @@ View a live example at [http://purser.herokuapp.com/](http://purser.herokuapp.co
 git clone https://github.com/bilbof/purser
 ```
 
-1. Add [purser.js](https://github.com/bilbof/purser/purser.js) to every page on your website. When a visitor creates an account, call purser.convert(obj) and add the user to your CRM/ChartMogul with attributes returned.
+1. Add [purser.js](https://github.com/bilbof/purser/blob/master/purser.js) to every page on your website. When a visitor creates an account, call purser.convert(obj) and add the user to your CRM/ChartMogul with attributes returned.
 2. When a visitor creates an account, call purser.convert(obj) to get the visitor's marketing attributes
 3. Add the user's marketing attributes to them in your CRM or app
 
 ## Example
 
-See an example at [http://github.com/bilbof/purser/example](http://github.com/bilbof/purser/example).
+See an example at [http://github.com/bilbof/purser/example](https://github.com/bilbof/purser/tree/master/example).
