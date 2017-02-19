@@ -1,0 +1,52 @@
+extends layout
+
+block content
+  h1= title
+  p #{title} is a JavaScript library for preserving user data from first website visit to signup.
+  p This enables you to associate signups to marketing campaigns, referrers, and more.
+  h3 How it works
+  p The library stores data such as <i>utm_medium</i>, <i>landing_page</i> and <i>referrer</i> in a localStorage object, and makes the object available via a handy API with the following methods:
+  pre #{title}.create() // automatically called on first website visit
+    | #{title}.fetch() // returns the object
+    | #{title}.convert() // returns the object updated with conversion data
+    | #{title}.update(obj) // lets you add additional parameters to the object
+    | #{title}.destroy // removes the object from localStorage
+  h3 Usage
+  p Add the library to every page on your website. When a visitor creates an account, call purser.convert() and add the user to your CRM/ChartMogul with attributes returned.
+  ol
+    li Install the #{purser} library
+    li When a visitor creates an account, call purser.convert(obj) to get the visitor's marketing attributes
+    li Add the user's marketing attributes to them in your CRM or app
+  a(href="https://github.com/bilbof/purser").btn.btn-text.btn-text--more View the Github repository
+  h3 Demo
+  p Enter your name and click the 'Demo Create Account' button to see an example of how #{title} works.
+  .demo
+  form
+    .form-group
+        input( type="text" placeholder="Your Name" required).form-control#name
+    .form-group
+        input(type="submit" value="Demo Create Account").btn.btn-primary#test
+    pre#result
+
+  script(src="/javascripts/purser.js")
+  script.
+    var submit = document.getElementById('test');
+    submit.addEventListener('click', function(e){
+      e.preventDefault();
+      
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "/test");
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = function() {
+        if(xhr.readyState == 4 && xhr.status == 200) {
+          document.getElementById('result').innerText = JSON.stringify(JSON.parse(xhr.responseText),  null, '\t')
+        }
+      }
+
+      xhr.send(JSON.stringify({
+        name: document.getElementById('name').value || "Not given",
+        lead_created_at: new Date().toISOString(),
+        purser_attributes: purser.convert({"sign_up_button_text": "DEMO CREATE ACCOUNT"})
+      }));
+
+    })

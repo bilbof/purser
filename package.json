@@ -1,0 +1,11 @@
+{
+  "name": "purser",
+  "version": "1.0.0",
+  "description": "A lightweight JavaScript library for preserving user data from first website visit to signup.",
+  "main": "pursor.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bill Franklin <bill@chartmogul.com>",
+  "license": "MIT"
+}
