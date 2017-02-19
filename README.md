@@ -14,7 +14,7 @@ Purser.update(obj) // lets you add additional parameters to the object
 Purser.destroy // removes the object from localStorage
 ```
 
-View a live example at [http://purser.herokuapp.com/](http://purser.herokuapp.com/).
+View a live example at [http://purser.herokuapp.com/](http://purser.herokuapp.com/?utm_medium=github&utm_source=github_repo_example).
 
 ## Installation
 
@@ -29,3 +29,38 @@ git clone https://github.com/bilbof/purser
 ## Example
 
 See an example at [http://github.com/bilbof/purser/example](https://github.com/bilbof/purser/tree/master/example).
+
+Code example
+
+```html
+<script src="purser.js"></script>
+<script>
+  $('.red-signup-button').click(function(){
+
+      var attributes = purser.convert({
+        signup_button: "red-signup-button"
+      });
+
+      // here send the customer object to your CRM/app with their attributes
+  });
+</script>
+```
+
+The `attributes` object in the example above would look something like this:
+
+```js
+{
+	"first_website_visit": "2017-02-19T17:52:18.088Z",
+	"referrer": "www.google.co.uk",
+	"browser_timezone": 0,
+	"browser_language": "en-GB",
+	"landing_page": "http://localhost:5000/product",
+	"screen_height": 800,
+	"screen_width": 1280,
+  "utm_medium": "google_search_ads",
+  "utm_source": "google",
+	"sign_up_button": "green-button",
+	"converted_at": "2017-02-19T17:52:41.981Z",
+	"conversion_page": "http://localhost:5000/signup"
+}
+```

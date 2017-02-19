@@ -46,7 +46,9 @@ block content
       xhr.send(JSON.stringify({
         name: document.getElementById('name').value || "Not given",
         lead_created_at: new Date().toISOString(),
-        purser_attributes: purser.convert({"sign_up_button_text": "DEMO CREATE ACCOUNT"})
+        purser_attributes: purser.convert({
+          sign_up_button: "green-button"
+        })
       }));
 
     })
