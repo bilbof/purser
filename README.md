@@ -64,3 +64,9 @@ The `attributes` object in the example above would look something like this:
 	"conversion_page": "http://localhost:5000/signup"
 }
 ```
+
+## Contributing
+
+If you would like to contribute, PLEASE DO! Just create a [Pull Request](https://github.com/bilbof/purser/compare) once you've made your changes.
+
+Want a feature added, but would prefer not to do it yourself? [Create an Issue](https://github.com/bilbof/purser/issues/new).
