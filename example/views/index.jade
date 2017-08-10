@@ -8,9 +8,16 @@ block content
   p The library stores data such as <i>utm_medium</i>, <i>landing_page</i> and <i>referrer</i> in a localStorage object, and makes the object available via a handy API with the following methods:
   pre #{title}.create() // automatically called on first website visit
     | #{title}.fetch() // returns the object
-    | #{title}.convert() // returns the object updated with conversion data
+    | #{title}.convert(obj) // returns the object updated with conversion data
     | #{title}.update(obj) // lets you add additional parameters to the object
-    | #{title}.destroy // removes the object from localStorage
+    | #{title}.destroy() // removes the object from localStorage
+    | ~~ NEW in version 1.1.0: track visits and pageviews ~~
+    | #{title}.visits.create() // adds a visit instance to the object, called automatically if has been over 30 minutes since the most recent visit.
+    | #{title}.visits.all() // returns an array of all visits
+    | #{title}.visits.fetch(id) // Fetch a specified visit
+    | #{title}.visits.update(id, obj) // Update a specified visit with data in an object
+    | #{title}.visits.delete(id) // Delete a specified visit
+
   h3 Usage
   p Add the library to every page on your website. When a visitor creates an account, call purser.convert() and add the user to your CRM/ChartMogul with attributes returned.
   ol
@@ -33,7 +40,7 @@ block content
     var submit = document.getElementById('test');
     submit.addEventListener('click', function(e){
       e.preventDefault();
-      
+
       var xhr = new XMLHttpRequest();
       xhr.open("POST", "/test");
       xhr.setRequestHeader("Content-Type", "application/json");
