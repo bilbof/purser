@@ -19,6 +19,7 @@
     },
     update: function(obj) {
       var attributes = this.fetch();
+      if (!attributes) { attributes = purser.create(); }
       for (var key in obj) {
         if (obj.hasOwnProperty(key)) {
           attributes[key] = obj[key];
@@ -29,9 +30,8 @@
     },
     createInstance: function() {
       var attributes = {
-        first_website_visit: new Date().toISOString(),
         referrer: document.referrer.length ? document.referrer : "direct",
-        browser_timezone: new Date().getTimezoneOffset(),
+        browser_timezone: new Date().getTimezoneOffset()/60,
         browser_language: window.navigator.language,
         landing_page: window.location.origin + window.location.pathname,
         screen_height: window.screen.height,
@@ -50,6 +50,7 @@
       var attributes = this.createInstance();
       attributes.last_visit = parseInt(new Date().getTime()/1000);
       attributes.pageviews = 1;
+      attributes.first_website_visit = new Date().toISOString();
       window.localStorage.setItem("purser_visitor", JSON.stringify(attributes));
       return attributes;
     },
@@ -65,6 +66,7 @@
         attributes.visits = attributes.visits || [];
         var visit = purser.createInstance();
         visit.id = (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+        visit.date = new Date().toISOString();
         attributes.visits.push(visit);
         attributes.last_visit = parseInt(new Date().getTime()/1000);
         purser.update(attributes);
