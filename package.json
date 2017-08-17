@@ -1,6 +1,6 @@
 {
   "name": "purser",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A lightweight JavaScript library for preserving user data from first website visit to signup.",
   "main": "pursor.js",
   "scripts": {

@@ -8,9 +8,15 @@ block content
   p The library stores data such as <i>utm_medium</i>, <i>landing_page</i> and <i>referrer</i> in a localStorage object, and makes the object available via a handy API with the following methods:
   pre #{title}.create() // automatically called on first website visit
     | #{title}.fetch() // returns the object
-    | #{title}.convert() // returns the object updated with conversion data
+    | #{title}.convert(obj) // returns the object updated with conversion data
     | #{title}.update(obj) // lets you add additional parameters to the object
-    | #{title}.destroy // removes the object from localStorage
+    | #{title}.destroy() // removes the object from localStorage
+    | #{title}.visits.create() // adds a visit instance to the object, called automatically if has been over 30 minutes since the most recent visit.
+    | #{title}.visits.all() // returns an array of all visits
+    | #{title}.visits.fetch(id) // Fetch a specified visit
+    | #{title}.visits.update(id, obj) // Update a specified visit with data in an object
+    | #{title}.visits.delete(id) // Delete a specified visit
+
   h3 Usage
   p Add the library to every page on your website. When a visitor creates an account, call purser.convert() and add the user to your CRM/ChartMogul with attributes returned.
   ol
@@ -25,15 +31,18 @@ block content
     .form-group
         input( type="text" placeholder="Your Name" required).form-control#name
     .form-group
-        input(type="submit" value="Demo Create Account").btn.btn-primary#test
+        <a class="btn btn-primary" id="test">Demo Create Account</a>
+        <a class="btn btn-default" id="test-visit">Add a visit</a>
+        <a class="btn btn-pink" id="test-delete">Delete object</a>
     pre#result
 
   script(src="/javascripts/purser.js")
   script.
     var submit = document.getElementById('test');
-    submit.addEventListener('click', function(e){
-      e.preventDefault();
-      
+    var visit = document.getElementById('test-visit');
+    var remove = document.getElementById('test-delete');
+
+    function post(data){
       var xhr = new XMLHttpRequest();
       xhr.open("POST", "/test");
       xhr.setRequestHeader("Content-Type", "application/json");
@@ -43,12 +52,31 @@ block content
         }
       }
 
-      xhr.send(JSON.stringify({
+      xhr.send(JSON.stringify(data));
+    }
+
+    submit.addEventListener('click', function(e){
+      e.preventDefault();
+      post({
         name: document.getElementById('name').value || "Not given",
         lead_created_at: new Date().toISOString(),
         purser_attributes: purser.convert({
           sign_up_button: "green-button"
         })
-      }));
+      })
+    })
 
+    visit.addEventListener('click', function(e){
+      e.preventDefault();
+      post({
+        name: document.getElementById('name').value || "Not given",
+        visit_button_clicked_at: new Date().toISOString(),
+        purser_attributes: purser.visits.create()
+      });
+    })
+
+    remove.addEventListener('click', function(e){
+      e.preventDefault();
+      purser.destroy();
+      document.getElementById('result').innerText = ""
     })
